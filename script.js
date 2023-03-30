@@ -1,6 +1,5 @@
 let tempBlock = document.querySelector('#temp')
 let cityBlock = document.querySelector('#city')
-let imgBlock = document.querySelector('.img-block')
 let local_date = document.querySelector('#local-date')
 let searchInp = document.querySelector('.search')
 
@@ -22,13 +21,14 @@ document.addEventListener('keydown', (e) => {
 })
 
 function init() {
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=e0dc0a3cc420dc09135db69654def5e9`)
+
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=e0dc0a3cc420dc09135db69654def5e9`)
         .then((resp) => {return resp.json()})
         .then((data) => {
 
-            tempBlock.textContent = `${temperature()}°`
+            tempBlock.textContent = `${temperature()} °`
 
-            cityBlock.textContent = `City: ${data.name}`
+            cityBlock.textContent = `Город: ${data.name}`
 
             console.log()
 
@@ -43,7 +43,7 @@ function init() {
             console.log('перезапуск')
         })
         .catch(() => {
-            alert('This city not found')
+            alert('Нету такого города')
             city = 'Saratov';
             init()
             searchInp.value = ''
